@@ -1,0 +1,617 @@
+{
+  "name": "intro",
+  "version": 33,
+  "source-key": {
+    "type": "figma",
+    "file": "aoJWXyObEoImEPweUDQqa5",
+    "node": "9:3794",
+    "version": "2202823211772677098",
+    "component-id": "b77d9d7471d8a58ebd1ce0d11afc5a220a113713"
+  },
+  "default": "Intro",
+  "design": {
+    "atoms": [
+      {
+        "type": "group",
+        "id": "top_level",
+        "root": "true"
+      },
+      {
+        "type": "group",
+        "id": "Group 173"
+      },
+      {
+        "type": "group",
+        "id": "StatusBar / iPhone X (or newer)"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle 90"
+      },
+      {
+        "type": "group",
+        "id": "Group 156"
+      },
+      {
+        "type": "group",
+        "id": "Group 151"
+      },
+      {
+        "type": "text",
+        "id": "UpTodo"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle 89"
+      },
+      {
+        "type": "vector",
+        "id": "Vector"
+      },
+      {
+        "type": "group",
+        "id": "Notch"
+      },
+      {
+        "type": "group",
+        "id": "Right Side"
+      },
+      {
+        "type": "group",
+        "id": "Left Side"
+      },
+      {
+        "type": "vector",
+        "id": "Notch1"
+      },
+      {
+        "type": "group",
+        "id": "Battery"
+      },
+      {
+        "type": "vector",
+        "id": "Wifi"
+      },
+      {
+        "type": "vector",
+        "id": "Mobile Signal"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle"
+      },
+      {
+        "type": "vector",
+        "id": "Combined Shape"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle1"
+      },
+      {
+        "type": "group",
+        "id": "_StatusBar-time"
+      },
+      {
+        "type": "text",
+        "id": "9:41"
+      }
+    ],
+    "modes": {
+      "Intro": {
+        "rules": [
+          {
+            "id": "top_level",
+            "is-structured": false,
+            "children": [
+              "Group 173",
+              "StatusBar / iPhone X (or newer)",
+              "Rectangle 90"
+            ],
+            "background-color": {
+              "alpha": 1.0,
+              "hue": 0.0,
+              "saturation": 0.0,
+              "value": 0.07058823529411765
+            }
+          },
+          {
+            "id": "Group 173",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 117.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 316.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 140.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 180.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Group 156"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "StatusBar / iPhone X (or newer)",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 375.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 44.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Notch",
+              "Right Side",
+              "Left Side"
+            ]
+          },
+          {
+            "id": "Rectangle 90",
+            "border-radius": 36.0,
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 121.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 799.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 134.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 5.0
+              }
+            },
+            "vector-content": "rectangle_90.svg"
+          },
+          {
+            "id": "Group 156",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 140.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 180.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Group 151",
+              "UpTodo"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "Group 151",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 14.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 0.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 113.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 113.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Rectangle 89",
+              "Vector"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "UpTodo",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 0.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 132.0
+              }
+            },
+            "font-weight": 700.0,
+            "color": {
+              "alpha": 1.0,
+              "hue": 0.0,
+              "saturation": 0.0,
+              "value": 1.0
+            },
+            "text-content": "UpTodo",
+            "overflow": "visible",
+            "text-align": "left",
+            "text-size": 40.0,
+            "line-height": 1.2,
+            "typeface": "Lato"
+          },
+          {
+            "id": "Rectangle 89",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 113.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 113.0
+              }
+            }
+          },
+          {
+            "id": "Vector",
+            "margin": {
+              "left": 8.828125,
+              "top": 15.890625,
+              "right": 9.137519836425781,
+              "bottom": 16.647323608398438
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": 1.0
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": 1.0
+              }
+            },
+            "vector-content": "vector.svg"
+          },
+          {
+            "id": "Notch",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 78.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": -2.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 219.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 30.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Notch1"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "Right Side",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 293.66680908203125
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 17.3306884765625
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 66.66122436523438
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 11.336018562316895
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Battery",
+              "Wifi",
+              "Mobile Signal"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "Left Side",
+            "border-radius": 24.0,
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 24.000022888183594
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 12.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 54.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 21.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "_StatusBar-time"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "Notch1",
+            "alignment": {
+              "horizontal": {
+                "attachment": "center",
+                "offset": 0.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 2.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 219.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 30.0
+              }
+            },
+            "vector-content": "notch.svg"
+          },
+          {
+            "id": "Battery",
+            "margin": {
+              "left": 42.33319091796875,
+              "top": 0.002685546875
+            },
+            "is-structured": false,
+            "children": [
+              "Rectangle",
+              "Combined Shape",
+              "Rectangle1"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "Wifi",
+            "alignment": {
+              "horizontal": {
+                "attachment": "end",
+                "offset": -29.36177921295166
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 0.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 15.27237606048584
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 10.965572357177734
+              }
+            },
+            "vector-content": "wifi.svg"
+          },
+          {
+            "id": "Mobile Signal",
+            "alignment": {
+              "horizontal": {
+                "attachment": "end",
+                "offset": -49.661224365234375
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 0.3359375
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 17.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 10.666666984558105
+              }
+            },
+            "vector-content": "mobile_signal.svg"
+          },
+          {
+            "id": "Rectangle",
+            "border-radius": 2.6666667461395264,
+            "alignment": {
+              "horizontal": {
+                "attachment": "end",
+                "offset": -2.3280372619628906
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 0.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 22.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 11.333333015441895
+              }
+            },
+            "vector-content": "rectangle.svg"
+          },
+          {
+            "id": "Combined Shape",
+            "alignment": {
+              "horizontal": {
+                "attachment": "end",
+                "offset": 7.152557373046875e-7
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 3.666656494140625
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 1.328037977218628
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 4.0
+              }
+            },
+            "vector-content": "combined_shape.svg"
+          },
+          {
+            "id": "Rectangle1",
+            "border-radius": 1.100000023841858,
+            "alignment": {
+              "horizontal": {
+                "attachment": "end",
+                "offset": -4.328037261962891
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 2.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 18.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 7.333333492279053
+              }
+            },
+            "vector-content": "rectangle1.svg"
+          },
+          {
+            "id": "_StatusBar-time",
+            "border-radius": 24.0,
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 54.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 21.0
+              }
+            },
+            "stroke-alignment": "center",
+            "is-structured": false,
+            "children": [
+              "9:41"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "9:41",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 0.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 1.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 54.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 20.0
+              }
+            },
+            "font-weight": 500.0,
+            "color": {
+              "alpha": 1.0,
+              "hue": 0.0,
+              "saturation": 0.0,
+              "value": 1.0
+            },
+            "text-content": "9:41",
+            "overflow": "visible",
+            "max-lines": -1,
+            "text-size": 15.0,
+            "letter-spacing": -0.5,
+            "line-height": 1.3333332824707032,
+            "typeface": "SF Pro Display"
+          }
+        ]
+      }
+    }
+  },
+  "previews": [
+    {
+      "design": "Intro",
+      "size": {
+        "width": 375.0,
+        "height": 812.0
+      }
+    }
+  ],
+  "adin-component-search-paths": [],
+  "image-search-paths": [],
+  "vector-search-paths": []
+}

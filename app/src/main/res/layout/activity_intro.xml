@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121212"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".ui.intro.IntroActivity">
+
+    <!-- Hình ảnh logo -->
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="113dp"
+        android:layout_height="113dp"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/vector_icon"
+        android:scaleType="fitCenter" />
+
+    <!-- Tên ứng dụng -->
+    <TextView
+        android:id="@+id/appName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quotion"
+        android:textSize="40sp"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"/>
+
+    <!-- Thanh ngang ở dưới -->
+    <View
+        android:layout_width="134dp"
+        android:layout_height="5dp"
+        android:background="@android:color/white"
+        android:layout_marginTop="400dp"
+        android:layout_gravity="center"
+        android:shape="oval" />
+</LinearLayout>
