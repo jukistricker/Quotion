@@ -5,8 +5,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.quotion.ui.AddQuoteActivity;
 import com.example.quotion.ui.MainActivity;
 import com.example.quotion.ui.intro.IntroActivity;
+import com.example.quotion.ui.login.LoginActivity;
 
 public class SplashActivity extends AppCompatActivity {
     @Override
@@ -27,7 +29,8 @@ public class SplashActivity extends AppCompatActivity {
             editor.apply();
         } else {
             // Nếu không phải lần đầu, chuyển thẳng đến MainActivity
-            startActivity(new Intent(this, MainActivity.class));
+//            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, LoginActivity.class));
         }
 
         finish(); // Đóng SplashActivity
