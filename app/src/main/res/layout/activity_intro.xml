@@ -28,12 +28,5 @@
         android:textStyle="bold"
         android:layout_marginTop="20dp"/>
 
-    <!-- Thanh ngang ở dưới -->
-    <View
-        android:layout_width="134dp"
-        android:layout_height="5dp"
-        android:background="@android:color/white"
-        android:layout_marginTop="400dp"
-        android:layout_gravity="center"
-        android:shape="oval" />
+
 </LinearLayout>
