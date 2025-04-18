@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Quotion</string>
+    <string name="text_intro_1">UpTodo</string>
+    <string name="intro_skip_2">SKIP</string>
+    <string name="intro_back_2">BACK</string>
+    <string name="btn_next_intro2">NEXT</string>
+    <string name="text1_intro2">You can easily manage all of your daily tasks in DoMe for free</string>
+    <string name="text2_intro2">Manage your tasks</string>
+    <string name="text1_intro3">Create daily routine</string>
+    <string name="text2_intro3">In Uptodo you can create your personalized routine to stay productive</string>
+    <string name="text1_intro4">Orgonaize your tasks</string>
+    <string name="text2_intro4">You can organize your daily tasks by adding your tasks into separate categories</string>
+    <string name="login_intro1">Welcome to UpTodo</string>
+    <string name="login_intro2">Please login to your account or create new account to continue</string>
+    <string name="intro_login">LOGIN</string>
+    <string name="intro_create_account">CREATE ACCOUNT</string>
 </resources>
