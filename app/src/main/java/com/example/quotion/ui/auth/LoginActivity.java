@@ -1,4 +1,4 @@
-package com.example.quotion.ui.login;
+package com.example.quotion.ui.auth;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -7,21 +7,15 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.credentials.CredentialManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.quotion.BuildConfig;
 import com.example.quotion.R;
+import com.example.quotion.ui.MainActivity;
 import com.example.quotion.viewmodel.LoginViewModel;
 
 import com.google.android.gms.auth.api.identity.BeginSignInRequest;
@@ -73,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
                 .setAutoSelectEnabled(true)
                 .build();
 
-        etUsername = findViewById(R.id.et_username);
+        etUsername = findViewById(R.id.et_email);
         etPassword = findViewById(R.id.et_password);
         btnLogin = findViewById(R.id.btn_login);
         btnGoogle = findViewById(R.id.btn_google);
@@ -134,7 +128,7 @@ public class LoginActivity extends AppCompatActivity {
                         .addOnCompleteListener(this, task -> {
                             if (task.isSuccessful()) {
                                 Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
-                                // TODO: chuyển vào HomeActivity
+                                navigateToMain();
                             } else {
                                 Toast.makeText(this, "Authentication failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
@@ -170,6 +164,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     GoogleSignInAccount account = task.getResult();
                     firebaseAuthWithGoogle(account.getIdToken());
+                    navigateToMain();
                 }
                 else {
                     Toast.makeText(this, "Google Sign In failed", Toast.LENGTH_SHORT).show();
@@ -183,6 +178,12 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    // Navigate to MainActivity
+    private void navigateToMain() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
     private void firebaseAuthWithGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         mAuth.signInWithCredential(credential)

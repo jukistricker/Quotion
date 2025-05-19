@@ -5,10 +5,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.quotion.ui.AddQuoteActivity;
-import com.example.quotion.ui.MainActivity;
+import com.example.quotion.ui.auth.RegisterActivity;
 import com.example.quotion.ui.intro.IntroActivity;
-import com.example.quotion.ui.login.LoginActivity;
+import com.example.quotion.ui.auth.LoginActivity;
 
 public class SplashActivity extends AppCompatActivity {
     @Override

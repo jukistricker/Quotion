@@ -49,21 +49,30 @@ android {
 
 dependencies {
 
-    // Import the BoM for the Firebase platform
+    // Import the BoM for Firebase platform
     implementation(platform("com.google.firebase:firebase-bom:33.12.0"))
 
-    // Declare the dependencies for the desired Firebase products without specifying versions
+    // Firebase libraries
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-firestore")
+    implementation("com.google.firebase:firebase-database")  // Include only if you need Realtime Database
 
-    // Google Sign-In
-    // https://mvnrepository.com/artifact/com.google.android.gms/play-services-auth
-
+    // Google Sign-In and Identity
     implementation("com.google.android.libraries.identity.googleid:googleid:1.1.0")
     implementation("androidx.credentials:credentials:1.2.0-alpha03")
     implementation("androidx.credentials:credentials-play-services-auth:1.2.0-alpha03")
-    implementation("com.google.android.gms:play-services-auth:21.3.0")
+    implementation(libs.play.services.auth)
 
+
+    // Other libraries
+    implementation("androidx.appcompat:appcompat:1.3.1")  // Check your version
+    implementation("com.google.android.material:material:1.4.0")  // Update as needed
+    implementation("androidx.activity:activity:1.2.4")  // Update as needed
+    implementation("androidx.constraintlayout:constraintlayout:2.1.0")  // Update as needed
+
+
+    // https://mvnrepository.com/artifact/com.google.android.filament/filament-android
+    implementation("com.google.android.filament:filament-android:1.51.0")
 
     implementation(libs.appcompat)
     implementation(libs.material)
