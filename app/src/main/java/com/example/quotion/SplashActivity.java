@@ -29,7 +29,7 @@ public class SplashActivity extends AppCompatActivity {
         } else {
             // Nếu không phải lần đầu, chuyển thẳng đến MainActivity
 //            startActivity(new Intent(this, MainActivity.class));
-            startActivity(new Intent(this, LoginActivity.class));
+            startActivity(new Intent(this, RegisterActivity.class));
         }
 
         finish(); // Đóng SplashActivity

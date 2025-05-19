@@ -16,8 +16,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.quotion.BuildConfig;
 import com.example.quotion.R;
 import com.example.quotion.ui.MainActivity;
-import com.example.quotion.viewmodel.LoginViewModel;
-
 import com.google.android.gms.auth.api.identity.BeginSignInRequest;
 import com.google.android.gms.auth.api.identity.Identity;
 import com.google.android.gms.auth.api.identity.SignInClient;
@@ -37,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText etUsername, etPassword;
     private Button btnLogin, btnGoogle;
-    private LoginViewModel loginViewModel;
+    private com.example.quotion.ui.auth.LoginViewModel loginViewModel;
     private GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
     private SignInClient oneTapClient;
@@ -90,11 +88,11 @@ public class LoginActivity extends AppCompatActivity {
 
 
         // Khởi tạo ViewModel
-        loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+        loginViewModel = new LoginViewModel(this);
 
         // Observe LiveData thay đổi trạng thái button
         loginViewModel.getIsLoginEnabled().observe(this, isEnabled -> {
-            btnLogin.setEnabled(isEnabled);
+            btnLogin.setEnabled(isEnabled != null && isEnabled); // tránh NPE
         });
 
         // TextWatcher lắng nghe thay đổi nhập liệu
@@ -156,27 +154,38 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("LoginActivity", "onActivityResult called with requestCode: " + requestCode + ", resultCode: " + resultCode);
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == RC_SIGN_IN) {
-            try {
-                Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-                if (task.isSuccessful()) {
-                    GoogleSignInAccount account = task.getResult();
-                    firebaseAuthWithGoogle(account.getIdToken());
-                    navigateToMain();
-                }
-                else {
-                    Toast.makeText(this, "Google Sign In failed", Toast.LENGTH_SHORT).show();
+            loginViewModel.handleGoogleSignInResult(data)
+                    .addOnSuccessListener(account -> {
+                        String idToken = account.getIdToken();
+                        if (idToken != null) {
+                            loginViewModel.signInWithGoogleAccount(idToken)
+                                    .addOnSuccessListener(authResult -> {
+                                        Log.d("LoginActivity", "GoogleSignInAccount success");
 
-
-                }
-            } catch (Exception e) {
-                Toast.makeText(this, "Google Sign In failed", Toast.LENGTH_SHORT).show();
-                Log.e("Google Sign In failed",e.getMessage());
-            }
+                                        Toast.makeText(this, "Signed in as: " + authResult.getUser().getEmail(), Toast.LENGTH_SHORT).show();
+                                        navigateToMain();
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        Log.e("LoginActivity", "Google sign-in failed", e);
+                                        Toast.makeText(this, "Firebase login failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    });
+                        } else {
+                            Toast.makeText(this, "ID token is null", Toast.LENGTH_SHORT).show();
+                            Log.e("Juki Error", "Id null");
+                        }
+                    })
+                    .addOnFailureListener(e -> {
+                        Log.e("LoginActivity", "Google sign-in failed", e);
+                        Toast.makeText(this, "Google Sign-In failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.e("Google Sign-In", "Failed", e);
+                    });
         }
     }
+
 
     // Navigate to MainActivity
     private void navigateToMain() {
