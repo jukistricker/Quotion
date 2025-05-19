@@ -2,19 +2,18 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
-    app:startDestination="@id/navigation_home">
+    android:id="@+id/nav_graph">
 
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@+id/nav_home"
         android:name="com.example.quotion.ui.home.HomeFragment"
-        android:label="Home"
+        android:label="@string/home"
         tools:layout="@layout/fragment_home"
         />
     <fragment
-        android:id="@+id/navigation_calendar"
-        android:name="com.example.quotion.ui.calendar.CalendarFragment"
-        android:label="Calendar"
+        android:id="@+id/nav_calendar"
+        android:name="com.example.quotion.ui.home.HomeFragment"
+        android:label="@string/calendar"
         tools:layout="@layout/fragment_calendar"
         />
 </navigation>

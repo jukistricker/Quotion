@@ -10,8 +10,10 @@ import com.example.quotion.ui.MainActivity;
 import com.example.quotion.utils.SimpleTextWatcher;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.common.api.ApiException;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.FirebaseUser;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -20,6 +22,18 @@ public class RegisterActivity extends AppCompatActivity {
     private MaterialButton btnGoogle;
     private static final int RC_SIGN_IN = 100;
     private RegisterViewModel viewModel;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            // User đã đăng nhập rồi => chuyển thẳng sang Main
+            navigateToMain();
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

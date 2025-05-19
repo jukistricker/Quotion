@@ -2,10 +2,18 @@
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/home"
-        android:title="Home" />
+        android:title="@string/home" />
     <item
         android:id="@+id/navigation_calendar"
         android:icon="@drawable/calendar"
-        android:title="Calendar"
+        android:title="@string/calendar"
         />
+    <item
+        android:id="@+id/navigation_focus"
+        android:icon="@drawable/clock"
+        android:title="Settings"/>
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/user"
+        android:title="Profile"/>
 </menu>
