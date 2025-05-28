@@ -19,9 +19,9 @@ public class LoginorRegister extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.intro_login);
 
-        Button btnLogin = findViewById(R.id.btn_login);
-        Button btnRegister = findViewById(R.id.btn_create_account);
-        ImageView btnBack = findViewById(R.id.btn_back);
+        Button btnLogin = findViewById(R.id.btn_login1);
+        Button btnRegister = findViewById(R.id.btn_create_account1);
+        ImageView btnBack = findViewById(R.id.btn_back1);
 
         btnLogin.setOnClickListener(view -> Login());
         btnRegister.setOnClickListener(view -> Register());

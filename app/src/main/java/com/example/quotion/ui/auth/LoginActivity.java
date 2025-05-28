@@ -1,16 +1,26 @@
 package com.example.quotion.ui.auth;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextPaint;
 import android.text.TextWatcher;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.credentials.CredentialManager;
 import androidx.lifecycle.ViewModelProvider;
@@ -53,6 +63,39 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        TextView tvRegister = findViewById(R.id.tv_register);
+        String fullText = "Don’t have an account? Register";
+        SpannableString spannableString = new SpannableString(fullText);
+
+// Tô màu xám cho phần đầu
+        ForegroundColorSpan graySpan = new ForegroundColorSpan(Color.parseColor("#979797"));
+        spannableString.setSpan(graySpan, 0, fullText.indexOf("Register"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+// Clickable và tô trắng cho "Register"
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(@NonNull View widget) {
+                // Mở RegisterActivity khi bấm vào "Register"
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+            }
+
+            @Override
+            public void updateDrawState(@NonNull TextPaint ds) {
+                super.updateDrawState(ds);
+                ds.setColor(Color.WHITE);         // Chữ trắng
+                ds.setUnderlineText(false);       // Không gạch dưới
+            }
+        };
+
+        int start = fullText.indexOf("Register");
+        int end = start + "Register".length();
+        spannableString.setSpan(clickableSpan, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+// Gán vào TextView
+        tvRegister.setText(spannableString);
+        tvRegister.setMovementMethod(LinkMovementMethod.getInstance());
+        tvRegister.setHighlightColor(Color.TRANSPARENT);  // Không có hiệu ứng nền khi bấm
+
 
         oneTapClient = Identity.getSignInClient(this);
         signInRequest = BeginSignInRequest.builder()
