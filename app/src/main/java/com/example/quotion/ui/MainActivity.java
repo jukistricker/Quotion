@@ -53,13 +53,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
-
-        myRef.setValue("Thọ ăn cứt!")
-                .addOnSuccessListener(aVoid -> Log.d("Firebase", "Ghi dữ liệu thành công"))
-                .addOnFailureListener(e -> Log.e("Firebase", "Lỗi ghi dữ liệu", e));
-
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         // Khởi tạo ViewModel

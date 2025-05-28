@@ -1,10 +1,12 @@
 package com.example.quotion.ui.auth;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import android.widget.Button;
@@ -16,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.quotion.BuildConfig;
 import com.example.quotion.R;
 import com.example.quotion.ui.MainActivity;
+import com.example.quotion.ui.intro.LoginorRegister;
 import com.google.android.gms.auth.api.identity.BeginSignInRequest;
 import com.google.android.gms.auth.api.identity.Identity;
 import com.google.android.gms.auth.api.identity.SignInClient;
@@ -35,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText etUsername, etPassword;
     private Button btnLogin, btnGoogle;
+    private ImageView btnBack;
     private com.example.quotion.ui.auth.LoginViewModel loginViewModel;
     private GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
@@ -44,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 9001;
 
 
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +75,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btn_login);
         btnGoogle = findViewById(R.id.btn_google);
 //        btnApple = findViewById(R.id.btn_apple);
+        btnBack = findViewById(R.id.btn_back);
 
         // Firebase Auth instance
         mAuth = FirebaseAuth.getInstance();
@@ -146,6 +152,10 @@ public class LoginActivity extends AppCompatActivity {
 //            Toast.makeText(this, "Apple Login clicked", Toast.LENGTH_SHORT).show();
 //            // TODO: Handle Apple Login
 //        });
+        //Xử lý nút trở lại trên trang đăng nhập
+        btnBack.setOnClickListener(v -> {
+            finish();
+        });
     }
     private void signInWithGoogle() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();

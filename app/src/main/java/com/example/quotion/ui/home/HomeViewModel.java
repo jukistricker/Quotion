@@ -2,6 +2,7 @@ package com.example.quotion.ui.home;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
 public class HomeViewModel extends ViewModel {

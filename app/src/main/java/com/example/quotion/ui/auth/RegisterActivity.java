@@ -1,5 +1,6 @@
 package com.example.quotion.ui.auth;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextWatcher;
@@ -7,6 +8,7 @@ import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.quotion.R;
 import com.example.quotion.ui.MainActivity;
+import com.example.quotion.ui.intro.LoginorRegister;
 import com.example.quotion.utils.SimpleTextWatcher;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.common.api.ApiException;
@@ -19,6 +21,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private EditText edtEmail, edtPassword, edtConfirmPassword;
     private Button btnRegister;
+    private ImageView btnBack;
     private MaterialButton btnGoogle;
     private static final int RC_SIGN_IN = 100;
     private RegisterViewModel viewModel;
@@ -35,6 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +52,7 @@ public class RegisterActivity extends AppCompatActivity {
         edtConfirmPassword = findViewById(R.id.edt_confirm_password);
         btnRegister = findViewById(R.id.btn_register);
         btnGoogle = findViewById(R.id.btn_google);
+        btnBack = findViewById(R.id.btn_back);
 
         btnRegister.setEnabled(false);
 
@@ -65,6 +70,8 @@ public class RegisterActivity extends AppCompatActivity {
             Intent signInIntent = viewModel.getGoogleSignInIntent();
             startActivityForResult(signInIntent, RC_SIGN_IN);
         });
+        // Back button click
+        btnBack.setOnClickListener(v -> back());
     }
 
     // Check if all fields are valid
@@ -114,6 +121,10 @@ public class RegisterActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Registration/Login failed", Toast.LENGTH_SHORT).show();
         }
+    }
+    //xử lý nút bấm quay trở lại
+    private void back(){
+        finish();
     }
 
     @Override

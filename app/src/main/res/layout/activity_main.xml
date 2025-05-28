@@ -15,17 +15,20 @@
         android:layout_marginBottom="64dp" />
 
     <!-- Floating Action Button nằm ở giữa -->
+
+    <!-- Bottom Navigation -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add_task"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginBottom="60dp"
-        app:srcCompat="@drawable/ic_add"
+        android:contentDescription="Add Task"
         app:backgroundTint="@color/purple"
-        android:contentDescription="Add Task" />
+        app:layout_anchor="@+id/fragment_container"
+        app:layout_anchorGravity="bottom|center"
+        app:srcCompat="@drawable/ic_add" />
 
-    <!-- Bottom Navigation -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
         android:layout_width="match_parent"

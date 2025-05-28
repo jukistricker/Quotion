@@ -16,16 +16,10 @@ public class IntroActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_intro);
-
-        // Ánh xạ các thành phần giao diện
-        ImageView logo = findViewById(R.id.logo);
-        TextView appName = findViewById(R.id.appName);
-
-        // Đặt nội dung động (nếu cần)
-        appName.setText("Quotion");
+        setContentView(R.layout.intro1);
+        // Chuyển sang màn hình chính sau 3 giây
         new Handler().postDelayed(() -> {
-            startActivity(new Intent(IntroActivity.this, OnboardingActivity.class));
+            startActivity(new Intent(IntroActivity.this, IntroNavigationActivity.class));
             finish();
         }, 3000);
 
