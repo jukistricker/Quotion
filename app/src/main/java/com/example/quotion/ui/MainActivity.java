@@ -2,15 +2,12 @@ package com.example.quotion.ui;
 
 import android.app.TimePickerDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -19,7 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.quotion.ColorSpinnerAdapter;
+import com.example.quotion.utils.ColorSpinnerAdapter;
 import com.example.quotion.R;
 import com.example.quotion.ui.calendar.CalendarFragment;
 import com.example.quotion.ui.focus.FocusFragment;
@@ -30,8 +27,6 @@ import com.example.quotion.ui.task.TaskRepository;
 import com.example.quotion.ui.task.TaskViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -98,6 +93,12 @@ public class MainActivity extends AppCompatActivity {
 
             return false;
         });
+
+        Bundle bundle = new Bundle();
+        bundle.putString("userId", userId);
+
+        homeFragment.setArguments(bundle);
+
 
     }
 
@@ -188,6 +189,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onSuccess() {
                     Toast.makeText(MainActivity.this, "Task added successfully", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
+
                 }
 
                 @Override

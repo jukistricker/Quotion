@@ -21,8 +21,6 @@ public class CalendarFragment extends Fragment {
         calendarViewModel = new ViewModelProvider(this).get(CalendarViewModel.class);
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        calendarViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 }
