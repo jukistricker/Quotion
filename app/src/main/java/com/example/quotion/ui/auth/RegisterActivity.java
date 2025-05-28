@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.quotion.R;
 import com.example.quotion.ui.MainActivity;
+import com.example.quotion.ui.intro.IntroNavigationActivity;
 import com.example.quotion.ui.intro.LoginorRegister;
 import com.example.quotion.utils.SimpleTextWatcher;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -168,6 +169,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
     //xử lý nút bấm quay trở lại
     private void back(){
+        startActivity(new Intent(this, IntroNavigationActivity.class));
         finish();
     }
 
