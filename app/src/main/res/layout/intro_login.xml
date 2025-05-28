@@ -2,14 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/btn_back"
+    android:id="@+id/intro_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
     android:clickable="true">
 
     <Button
-        android:id="@+id/btn_create_account"
+        android:id="@+id/btn_create_account1"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
@@ -20,11 +20,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login"
+        app:layout_constraintTop_toBottomOf="@+id/btn_login1"
         app:layout_constraintVertical_bias="0.092" />
 
     <Button
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_login1"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="132dp"
@@ -68,7 +68,7 @@
 
 
     <ImageView
-        android:id="@+id/btn_back"
+        android:id="@+id/btn_back1"
         android:layout_width="12dp"
         android:layout_height="14dp"
         app:layout_constraintBottom_toTopOf="@+id/textView2"

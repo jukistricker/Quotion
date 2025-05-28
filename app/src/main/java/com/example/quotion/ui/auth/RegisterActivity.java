@@ -2,9 +2,19 @@ package com.example.quotion.ui.auth;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextPaint;
 import android.text.TextWatcher;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
+import android.view.View;
 import android.widget.*;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.quotion.R;
 import com.example.quotion.ui.MainActivity;
@@ -43,6 +53,40 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        TextView tvRegister = findViewById(R.id.txt_already_have_account);
+        String fullText = "Already have an account? Login";
+        SpannableString spannableString = new SpannableString(fullText);
+
+// Tô màu xám cho phần đầu
+        ForegroundColorSpan graySpan = new ForegroundColorSpan(Color.parseColor("#979797"));
+        spannableString.setSpan(graySpan, 0, fullText.indexOf("Login"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+// Clickable và tô trắng cho "Login"
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(@NonNull View widget) {
+                // Mở RegisterActivity khi bấm vào "Register"
+                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+            }
+
+            @Override
+            public void updateDrawState(@NonNull TextPaint ds) {
+                super.updateDrawState(ds);
+                ds.setColor(Color.WHITE);         // Chữ trắng
+                ds.setUnderlineText(false);       // Không gạch dưới
+            }
+        };
+
+        int start = fullText.indexOf("Login");
+        int end = start + "Login".length();
+        spannableString.setSpan(clickableSpan, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+// Gán vào TextView
+        tvRegister.setText(spannableString);
+        tvRegister.setMovementMethod(LinkMovementMethod.getInstance());
+        tvRegister.setHighlightColor(Color.TRANSPARENT);  // Không có hiệu ứng nền khi bấm
+
 
         viewModel = new RegisterViewModel(this);
 
