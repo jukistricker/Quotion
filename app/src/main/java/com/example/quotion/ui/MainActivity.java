@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.quotion.ColorSpinnerAdapter;
 import com.example.quotion.R;
 import com.example.quotion.ui.calendar.CalendarFragment;
 import com.example.quotion.ui.focus.FocusFragment;
@@ -117,12 +118,18 @@ public class MainActivity extends AppCompatActivity {
         EditText edtDescription = view.findViewById(R.id.edtDescription);
         ImageView btnSelectTime = view.findViewById(R.id.btnSelectTime);
         Spinner spinnerColor = view.findViewById(R.id.spinnerColor);
+        ImageView btnSelectCategory = view.findViewById(R.id.btnSelectCategory);  // view là root view nếu trong Dialog
         Button btnSend = view.findViewById(R.id.btnSend);
 
-        // Spinner setup
-        String[] colors = {"Red", "Blue", "Green"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, colors);
+        String[] colors = {
+                "Red", "Orange", "Yellow", "Lime", "Green",
+                "Cyan", "Sky Blue", "Blue", "Indigo", "Violet"
+        };
+
+        ColorSpinnerAdapter adapter = new ColorSpinnerAdapter(this, colors);
         spinnerColor.setAdapter(adapter);
+
+
 
         final Calendar selectedDateTime = Calendar.getInstance();
         final String[] selectedTime = {""};
@@ -142,6 +149,19 @@ public class MainActivity extends AppCompatActivity {
             }, now.get(Calendar.HOUR_OF_DAY), now.get(Calendar.MINUTE), true).show();
         });
 
+        final String[] selectedCategory = {"Free"}; // mặc định là "Free"
+        btnSelectCategory.setOnClickListener(v -> {
+            final String[] categories = {"Free", "Busy"};
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Select Category");
+            builder.setItems(categories, (dialogInterface, which) -> {
+                selectedCategory[0] = categories[which];
+                Toast.makeText(this, "Selected: " + selectedCategory[0], Toast.LENGTH_SHORT).show();
+            });
+            builder.show();
+        });
+
 
 
         AlertDialog dialog = new AlertDialog.Builder(this)
@@ -153,13 +173,14 @@ public class MainActivity extends AppCompatActivity {
             String desc = edtDescription.getText().toString();
             String time = selectedTime[0];
             String color = spinnerColor.getSelectedItem().toString();
+            String category = selectedCategory[0];
 
             if (title.isEmpty() || time.isEmpty()) {
                 Toast.makeText(this, "Please enter title and select time", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            Task task = new Task(title, desc, time, color, userId);
+            Task task = new Task(title, desc, time, color, userId,category);
 
             // Gọi ViewModel để tạo task
             taskViewModel.createTask(task, new TaskRepository.TaskCallback() {
