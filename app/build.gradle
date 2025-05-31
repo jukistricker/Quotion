@@ -26,7 +26,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -39,6 +39,7 @@ android {
 
     buildFeatures {
         buildConfig true
+        dataBinding true
     }
 }
 
@@ -81,4 +82,11 @@ dependencies {
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
+
+    //Thư viện thống kê ngày
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation 'com.mikhaellopez:circularprogressbar:3.1.0'
+
+
+
 }
