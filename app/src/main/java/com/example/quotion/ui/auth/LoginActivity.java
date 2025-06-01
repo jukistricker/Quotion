@@ -208,6 +208,7 @@ public class LoginActivity extends AppCompatActivity {
 //        });
         //Xử lý nút trở lại trên trang đăng nhập
         btnBack.setOnClickListener(v -> {
+            startActivity(new Intent(LoginActivity.this, LoginorRegister.class));
             finish();
         });
     }

@@ -41,6 +41,7 @@ public class LoginorRegister extends AppCompatActivity {
         finish();
     }
     private void back(){
+        startActivity(new Intent(this, IntroNavigationActivity.class));
         finish();
     }
 }

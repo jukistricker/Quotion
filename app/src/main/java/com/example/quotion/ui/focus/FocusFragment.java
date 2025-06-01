@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.quotion.R;
+import com.example.quotion.ui.focus.chart.FocusChartFragment;
+import com.example.quotion.ui.focus.timer.FocusTimerFragment;
+import com.example.quotion.ui.focus.usage.AppUsageFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,9 +61,16 @@ public class FocusFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_focus, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_focus, container, false);
+
+        // Thêm fragment con vào container
+        getChildFragmentManager().beginTransaction()
+                .replace(R.id.focusTimerFragment, new FocusTimerFragment())
+                .replace(R.id.focusChartFragment, new FocusChartFragment())
+                .replace(R.id.appUsageFragment, new AppUsageFragment())
+                .commit();
+
+        return view;
     }
 }

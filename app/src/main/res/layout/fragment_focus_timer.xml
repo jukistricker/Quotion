@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.quotion.ui.focus.FocusViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="24dp">
+
+        <!-- Circular Progress Timer -->
+
+        <com.mikhaellopez.circularprogressbar.CircularProgressBar
+            android:id="@+id/circularProgressBar"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            app:cpb_progressbar_width="12dp"
+            app:cpb_background_progressbar_width="12dp"
+            app:cpb_progressbar_color="@color/purple"
+            app:cpb_background_progressbar_color="#DDDDDD"
+            app:cpb_round_border="true"
+            app:cpb_progress="0"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_timer"
+            android:layout_width="105dp"
+            android:layout_height="55dp"
+            android:text="25:00"
+            android:textColor="#333333"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="@id/circularProgressBar"
+            app:layout_constraintBottom_toBottomOf="@id/circularProgressBar"
+            app:layout_constraintStart_toStartOf="@id/circularProgressBar"
+            app:layout_constraintEnd_toEndOf="@id/circularProgressBar" />
+
+        <SeekBar
+            android:id="@+id/seekBar_duration"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:max="180"
+            android:progress="25"
+            app:layout_constraintTop_toBottomOf="@id/circularProgressBar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="32dp" />
+
+        <TextView
+            android:id="@+id/tv_selected_minutes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="25 phút"
+            android:textSize="16sp"
+            android:textColor="#555555"
+            app:layout_constraintTop_toBottomOf="@id/seekBar_duration"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp" />
+
+        <Button
+            android:id="@+id/btn_start_focus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="@color/purple"
+            android:text="Start Focus"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_selected_minutes" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
