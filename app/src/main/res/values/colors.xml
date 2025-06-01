@@ -10,6 +10,7 @@
     <color name="purple">#8875FF</color>
     <color name="color_Primary_Color">#8875FF</color>
     <color name="color_Primary_Color_50">#808875FF</color>
-
+    <color name="red">#FF4949</color>
+    <color name="dark_gray">#362A2A2A</color>
 
 </resources>
