@@ -24,4 +24,17 @@ public class AppUsageItem {
     public Drawable getAppIcon() {
         return appIcon;
     }
+    public String formatUsageTime(long millis) {
+        long totalSeconds = millis / 1000;
+        long hours = totalSeconds / 3600;
+        long minutes = (totalSeconds % 3600) / 60;
+
+        StringBuilder sb = new StringBuilder("You spent ");
+        if (hours > 0) {
+            sb.append(hours).append(hours == 1 ? " hour " : " hours ");
+        }
+        sb.append(minutes).append(minutes == 1 ? " minute" : " minutes");
+
+        return sb.toString();
+    }
 }

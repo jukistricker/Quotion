@@ -16,6 +16,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -37,6 +39,9 @@ public class AppUsageFragment extends Fragment {
 
     private FragmentAppUsageBinding binding;
 
+
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -47,8 +52,20 @@ public class AppUsageFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        setupSpinners();
         requestUsageStatsPermissionIfNeeded();
-        loadAppUsageStats();
+
+        AppUsageAdapter adapter = new AppUsageAdapter(new ArrayList<>(), requireContext());
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        binding.recyclerView.setAdapter(adapter);
+
+        if (hasUsageStatsPermission()) {
+            loadAppUsageStats();
+        }else {
+            requestUsageStatsPermissionIfNeeded();
+        }
+
     }
     @Override
     public void onResume() {
@@ -75,6 +92,30 @@ public class AppUsageFragment extends Fragment {
             Toast.makeText(requireContext(), "Vui lòng cấp quyền Usage Access", Toast.LENGTH_LONG).show();
         }
     }
+    private void setupSpinners() {
+        ArrayAdapter<String> timePeriodAdapter = new ArrayAdapter<>(
+                requireContext(), android.R.layout.simple_spinner_item, new String[]{"Ngày", "Tuần"});
+        timePeriodAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.spinnerTimePeriod.setAdapter(timePeriodAdapter);
+
+        ArrayAdapter<String> topCountAdapter = new ArrayAdapter<>(
+                requireContext(), android.R.layout.simple_spinner_item, new String[]{"Top 5", "Top 10"});
+        topCountAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.spinnerTopCount.setAdapter(topCountAdapter);
+
+        // Gắn listener
+        AdapterView.OnItemSelectedListener listener = new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                loadAppUsageStats(); // reload khi người dùng thay đổi
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        };
+        binding.spinnerTimePeriod.setOnItemSelectedListener(listener);
+        binding.spinnerTopCount.setOnItemSelectedListener(listener);
+    }
 
     private void loadAppUsageStats() {
         UsageStatsManager usageStatsManager = (UsageStatsManager) requireContext().getSystemService(Context.USAGE_STATS_SERVICE);
@@ -82,10 +123,28 @@ public class AppUsageFragment extends Fragment {
         PackageManager pm = requireContext().getPackageManager();
 
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
 
+
+
+        String timePeriod = binding.spinnerTimePeriod.getSelectedItem().toString();
+        String topCountStr = binding.spinnerTopCount.getSelectedItem().toString();
+
+        int intervalType = UsageStatsManager.INTERVAL_DAILY;
+        Log.d(TAG, "Selected Time Period: " + timePeriod); // Ghi log lựa chọn thời gian
+        if (timePeriod.equals("Ngày")) {
+            calendar.set(Calendar.HOUR_OF_DAY, 0);
+            calendar.set(Calendar.MINUTE, 0);
+            intervalType = UsageStatsManager.INTERVAL_DAILY;
+            Log.d(TAG, "Using INTERVAL_DAILY for daily stats");
+        } else {
+            calendar.set(Calendar.DAY_OF_WEEK, calendar.getFirstDayOfWeek());
+            calendar.set(Calendar.HOUR_OF_DAY, 0);
+            calendar.set(Calendar.MINUTE, 0);
+            intervalType = UsageStatsManager.INTERVAL_WEEKLY;
+            Log.d(TAG, "Using INTERVAL_WEEKLY for weekly stats");
+        }
         long startTime = calendar.getTimeInMillis();
         long endTime = System.currentTimeMillis();
 
@@ -95,7 +154,8 @@ public class AppUsageFragment extends Fragment {
         Log.d(TAG, "Đến: " + sdf.format(new Date(endTime)) + " (millis: " + endTime + ")");
 //---------------------------------------------------------//
 
-        List<UsageStats> stats = usageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, startTime, endTime);
+        List<UsageStats> stats = usageStatsManager.queryUsageStats(intervalType, startTime, endTime);
+
         if (stats == null || stats.isEmpty()) {
             Log.w(TAG, "Không có dữ liệu UsageStats trả về từ UsageStatsManager hoặc danh sách trống.");
             Toast.makeText(requireContext(), "Không có dữ liệu sử dụng", Toast.LENGTH_SHORT).show();
@@ -160,14 +220,18 @@ public class AppUsageFragment extends Fragment {
             }
         }
 
+        int topCount = topCountStr.equals("Top 10") ? 10 : 5;
+
+        Log.d("AppUsage", "Đã chọn: " + timePeriod + ", " + topCountStr);
+
         // Sắp xếp theo thời gian sử dụng giảm dần
         Collections.sort(appUsageItems, (a, b) -> Long.compare(b.getUsageTime(), a.getUsageTime()));
 
         // Chỉ lấy 5 ứng dụng sử dụng nhiều nhất trong ngày
-        List<AppUsageItem> top5Items = appUsageItems.subList(0, Math.min(5, appUsageItems.size()));
+        List<AppUsageItem> topItems = appUsageItems.subList(0, Math.min(topCount, appUsageItems.size()));
 
         // Gán vào RecyclerView
-        AppUsageAdapter adapter = new AppUsageAdapter(top5Items, requireContext());
+        AppUsageAdapter adapter = new AppUsageAdapter(topItems, requireContext());
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerView.setAdapter(adapter);
     }

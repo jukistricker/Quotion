@@ -19,7 +19,6 @@
             android:text="Thống kê thời gian Focus"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:layout_gravity="center_horizontal"
             android:paddingBottom="12dp" />
 
         <com.github.mikephil.charting.charts.BarChart
