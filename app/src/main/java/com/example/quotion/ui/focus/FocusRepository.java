@@ -19,6 +19,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 public class FocusRepository {
 
@@ -33,7 +34,7 @@ public class FocusRepository {
     }
 
     public FocusRepository() {
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         focusRef = FirebaseDatabase.getInstance().getReference("focus_sessions").child(userId);
     }
 
@@ -61,7 +62,7 @@ public class FocusRepository {
                         long duration = session.getDuration();
 
                         if (dateString != null) {
-                            String weekday = getWeekdayFromDate(dateString); // e.g., MON
+                            String weekday = getWeekdayFromDate(dateString);
                             long total = focusPerWeekday.getOrDefault(weekday, 0L);
                             focusPerWeekday.put(weekday, total + duration);
                         }
