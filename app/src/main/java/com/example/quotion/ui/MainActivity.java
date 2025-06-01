@@ -180,6 +180,11 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Please enter title and select time", Toast.LENGTH_SHORT).show();
                 return;
             }
+            Calendar now = Calendar.getInstance();
+            if (selectedDateTime.before(now)) {
+                Toast.makeText(this, "Time must not be in the past", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             Task task = new Task(title, desc, time, color, userId,category);
 

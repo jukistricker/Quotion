@@ -35,9 +35,16 @@ public class TaskRepository {
                             }
                         }
 
-                        taskRef.push().setValue(task)
-                                .addOnSuccessListener(unused -> callback.onSuccess())
-                                .addOnFailureListener(e -> callback.onFailure(e.getMessage()));
+                        // 🔧 Tạo key trước, rồi set vào Task object
+                        String key = taskRef.push().getKey();
+                        if (key != null) {
+                            task.setKey(key);
+                            taskRef.child(key).setValue(task)
+                                    .addOnSuccessListener(unused -> callback.onSuccess())
+                                    .addOnFailureListener(e -> callback.onFailure(e.getMessage()));
+                        } else {
+                            callback.onFailure("Failed to generate Firebase key.");
+                        }
                     }
 
                     @Override
@@ -46,6 +53,7 @@ public class TaskRepository {
                     }
                 });
     }
+
 
     public LiveData<List<Task>> getUserTasks(String userId) {
         MutableLiveData<List<Task>> taskList = new MutableLiveData<>();
@@ -56,7 +64,10 @@ public class TaskRepository {
                         List<Task> list = new ArrayList<>();
                         for (DataSnapshot snap : snapshot.getChildren()) {
                             Task task = snap.getValue(Task.class);
-                            if (task != null) list.add(task);
+                            if (task != null) {
+                                task.setKey(snap.getKey());
+                                list.add(task);
+                            }
                         }
                         taskList.setValue(list);
                     }
@@ -69,5 +80,30 @@ public class TaskRepository {
 
         return taskList;
     }
+    public void updateTask(Task task, TaskCallback callback) {
+        String key = task.getKey();
+        if (key == null || key.isEmpty()) {
+            callback.onFailure("Task key is missing");
+            return;
+        }
+
+        taskRef.child(key).setValue(task)
+                .addOnSuccessListener(unused -> callback.onSuccess())
+                .addOnFailureListener(e -> callback.onFailure(e.getMessage()));
+    }
+
+    public void deleteTask(Task task, TaskCallback callback) {
+        String key = task.getKey();
+        if (key == null || key.isEmpty()) {
+            callback.onFailure("Task key is missing");
+            return;
+        }
+
+        taskRef.child(key).removeValue()
+                .addOnSuccessListener(unused -> callback.onSuccess())
+                .addOnFailureListener(e -> callback.onFailure(e.getMessage()));
+    }
+
+
 }
 

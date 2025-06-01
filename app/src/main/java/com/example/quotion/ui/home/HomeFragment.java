@@ -1,5 +1,6 @@
 package com.example.quotion.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.quotion.R;
 import com.example.quotion.ui.task.Task;
 import com.example.quotion.ui.task.TaskAdapter;
+import com.example.quotion.ui.task.TaskDetailActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.*;
 
@@ -47,7 +49,18 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView = root.findViewById(R.id.taskRecyclerView);
 
-        adapter = new TaskAdapter();
+        adapter = new TaskAdapter(task -> {
+            Intent intent = new Intent(getContext(), TaskDetailActivity.class);
+            intent.putExtra("title", task.title);
+            intent.putExtra("description", task.description);
+            intent.putExtra("startTime", task.startTime);
+            intent.putExtra("color", task.color);
+            intent.putExtra("category", task.category);
+            intent.putExtra("key", task.key);
+            intent.putExtra("userId",task.userId);
+            startActivity(intent);
+        });
+
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -71,6 +84,7 @@ public class HomeFragment extends Fragment {
                             }
                         }
                         adapter.setTasks(taskList);
+                        System.out.println(taskList);
                     }
 
                     @Override

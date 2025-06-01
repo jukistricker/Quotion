@@ -28,4 +28,15 @@
         <item>Top 10</item>
     </string-array>
 
+    <string-array name="category_options">
+        <item>Free</item>
+        <item>Busy</item>
+    </string-array>
+
+    <string-array name="color_options">
+        <item>Gray</item>
+        <item>Red</item>
+        <item>Blue</item>
+    </string-array>
+
 </resources>
