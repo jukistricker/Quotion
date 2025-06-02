@@ -11,6 +11,23 @@
     <color name="color_Primary_Color">#8875FF</color>
     <color name="color_Primary_Color_50">#808875FF</color>
     <color name="red">#FF4949</color>
-    <color name="dark_gray">#362A2A2A</color>
+    <color name="dark_gray">#363636</color>
+    <color name="color_primary_color">#FF6200EE</color>
+    <color name="color_primary_color_light">#FF9C47FF</color>
+    <color name="color_secondary_color">#FF3700B3</color>
+    <color name="color_tertiary_color">#FF424242</color>
 
+    <!-- Text colors -->
+    <color name="color_gray">#FF9E9E9E</color>
+    <color name="color_error">#8687E7</color>
+
+    <!-- Alpha colors -->
+    <color name="white_87">#DDFFFFFF</color>
+    <color name="white_100">#FFFFFFFF</color>
+
+    <color name="calendar_primary_color">#8687E7</color>
+    <color name="calendar_secondary_color">#2196F3</color>
+    <color name="calendar_tertiary_color">#424242</color>
+    <color name="calendar_error">#F44336</color>
+    <color name="calendar_gray">#9E9E9E</color>
 </resources>
