@@ -92,7 +92,9 @@ public class CalendarFragment extends Fragment {
             }
         });
 
-
+        String dateStr = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                .format(Calendar.getInstance().getTime());
+        fetchTasksForDate(dateStr);
 
         return root;
     }

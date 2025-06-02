@@ -2,6 +2,7 @@ package com.example.quotion.ui;
 
 import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -255,6 +256,15 @@ public class MainActivity extends AppCompatActivity {
         });
 
         dialog.show();
+    }
+
+    public void navigateToProfile() {
+        BottomNavigationView navView = findViewById(R.id.bottom_nav);
+        if (navView != null) {
+            navView.setSelectedItemId(R.id.navigation_profile);
+        } else {
+            Log.e("MainActivity", "bottomNavigationView not found!");
+        }
     }
 
 }
