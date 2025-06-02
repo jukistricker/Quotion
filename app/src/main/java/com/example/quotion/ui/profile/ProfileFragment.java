@@ -19,10 +19,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.quotion.R;
 import com.example.quotion.databinding.FragmentProfileBinding;
+import com.example.quotion.ui.auth.LoginActivity;
+import com.example.quotion.ui.intro.IntroNavigationActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class ProfileFragment extends Fragment {
     private FragmentProfileBinding binding;
@@ -46,6 +50,16 @@ public class ProfileFragment extends Fragment {
         });
 
         viewModel.loadUserProfile();
+
+        binding.btnLogout.setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut();
+
+            Toast.makeText(requireContext(), "Đã đăng xuất", Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(requireContext(), IntroNavigationActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        });
 
         return binding.getRoot();
     }
