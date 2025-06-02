@@ -1,6 +1,7 @@
 package com.example.quotion.ui;
 
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -267,4 +268,17 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // mở thẳng đến focus fragment
+    private void handleIntent(Intent intent) {
+        if (intent != null) {
+            String openFragment = intent.getStringExtra("open_fragment");
+            if ("focus".equals(openFragment)) {
+                switchFragment(focusFragment);
+                // Đồng thời đổi selection ở BottomNavigationView cho đúng
+                BottomNavigationView bottomNav = findViewById(R.id.bottom_nav);
+                bottomNav.setSelectedItemId(R.id.navigation_focus);
+            }
+        }
+
+    }
 }
