@@ -28,7 +28,8 @@
         app:backgroundTint="@color/purple"
         app:layout_anchor="@+id/fragment_container"
         app:layout_anchorGravity="bottom|center"
-        app:srcCompat="@drawable/ic_add" />
+        app:srcCompat="@drawable/ic_add"
+        style="@style/Widget.MyApp.FAB"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"

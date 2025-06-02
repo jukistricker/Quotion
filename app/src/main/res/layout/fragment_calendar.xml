@@ -11,6 +11,7 @@
         android:text=" Calendar "
         android:textColor="#FFFFFF"
         android:textSize="18sp"
+        android:textStyle="bold"
         android:layout_marginBottom="16dp"
         android:layout_gravity="center"/>
 
