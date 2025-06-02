@@ -1,8 +1,15 @@
 package com.example.quotion.ui;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +28,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.quotion.receiver.TaskAlarmReceiver;
 import com.example.quotion.utils.ColorSpinnerAdapter;
 import com.example.quotion.R;
 import com.example.quotion.ui.calendar.CalendarFragment;
@@ -105,6 +113,18 @@ public class MainActivity extends AppCompatActivity {
         bundle.putString("userId", userId);
 
         homeFragment.setArguments(bundle);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(
+                    "task_reminder_channel",
+                    "Task Reminder",
+                    NotificationManager.IMPORTANCE_HIGH); // IMPORTANCE_HIGH để có tiếng chuông
+            channel.setDescription("Channel for task reminders");
+
+            NotificationManager manager = this.getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+
 
 
     }
@@ -194,6 +214,7 @@ public class MainActivity extends AppCompatActivity {
             taskViewModel.createTask(task, new TaskRepository.TaskCallback() {
                 @Override
                 public void onSuccess() {
+                    scheduleTaskAlarm(task);
                     Toast.makeText(MainActivity.this, "Task added successfully", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
 
@@ -268,6 +289,33 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void scheduleTaskAlarm(Task task) {
+        Intent intent = new Intent(this, TaskAlarmReceiver.class);
+        intent.putExtra("title", task.title);
+        intent.putExtra("description", task.description);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                this,
+                task.key != null ? task.key.hashCode() : task.title.hashCode(), // unique ID
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+        );
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
+            Date date = sdf.parse(task.startTime); // định dạng thời gian giống như khi tạo task
+
+            if (date != null) {
+                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, date.getTime(), pendingIntent);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     // mở thẳng đến focus fragment
     private void handleIntent(Intent intent) {
         if (intent != null) {
@@ -281,4 +329,29 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+    public static void createNotificationChannel(Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            String channelId = "task_reminder_channel";
+            String channelName = "Task Reminder Notifications";
+            NotificationManager manager = context.getSystemService(NotificationManager.class);
+
+            if (manager != null) {
+                NotificationChannel existingChannel = manager.getNotificationChannel(channelId);
+                if (existingChannel == null) {
+                    NotificationChannel channel = new NotificationChannel(
+                            channelId,
+                            channelName,
+                            NotificationManager.IMPORTANCE_HIGH
+                    );
+                    channel.setDescription("Notifications for task reminders");
+                    // Thiết lập âm thanh mặc định
+                    channel.setSound(android.provider.Settings.System.DEFAULT_NOTIFICATION_URI, null);
+                    channel.enableVibration(true);
+
+                    manager.createNotificationChannel(channel);
+                }
+            }
+        }
+    }
+
 }
