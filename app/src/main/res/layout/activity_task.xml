@@ -7,7 +7,7 @@
 
     <!-- Nút Cancel -->
     <FrameLayout
-        android:id="@+id/btnAdd"
+        android:id="@+id/btnCancel"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_marginTop="55dp"

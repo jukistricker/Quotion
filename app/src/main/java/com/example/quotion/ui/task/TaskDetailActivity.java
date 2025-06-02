@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -23,7 +24,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.quotion.R;
 import com.example.quotion.ui.MainActivity;
 import com.example.quotion.ui.category.CategorySpinnerAdapter;
-import com.example.quotion.ui.home.HomeFragment;
 import com.example.quotion.ui.priority.PrioritySpinnerAdapter;
 
 import java.text.SimpleDateFormat;
@@ -50,13 +50,7 @@ public class TaskDetailActivity extends AppCompatActivity {
         spinnerCategory = findViewById(R.id.spinnerCategory);
         spinnerColor = findViewById(R.id.spinnerColoredt);
 
-        List<String> categoryList = Arrays.asList("Free", "Busy");
-        List<String> colorList = Arrays.asList("Red", "Green", "Blue");
 
-        CategorySpinnerAdapter categoryAdapter = new CategorySpinnerAdapter(this, categoryList);
-        PrioritySpinnerAdapter priorityAdapter = new PrioritySpinnerAdapter(this, colorList);
-        spinnerCategory.setAdapter(categoryAdapter);
-        spinnerColor.setAdapter(priorityAdapter);
 
         taskViewModel = new ViewModelProvider(this).get(TaskViewModel.class);
 
@@ -103,6 +97,14 @@ public class TaskDetailActivity extends AppCompatActivity {
         tvTitle.setText(title);
         tvDescription.setText(description);
         timeValue.setText(startTime);
+
+        List<String> categoryList = Arrays.asList("Free", "Busy");
+        List<String> colorList = Arrays.asList("1", "2", "3","4","5");
+
+        CategorySpinnerAdapter categoryAdapter = new CategorySpinnerAdapter(this, categoryList);
+        PrioritySpinnerAdapter priorityAdapter = new PrioritySpinnerAdapter(this, colorList);
+        spinnerCategory.setAdapter(categoryAdapter);
+        spinnerColor.setAdapter(priorityAdapter);
 
 //        TextView categoryText = (TextView) categoryContainer.getChildAt(0);
 //        categoryText.setText(category);
@@ -169,6 +171,15 @@ public class TaskDetailActivity extends AppCompatActivity {
                     .show();
         });
 
+        FrameLayout btnCancell = findViewById(R.id.btnCancel);
+        btnCancell.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish(); // Đóng activity hiện tại
+            }
+        });
+
+
     }
 
     private void showEditDialog() {
@@ -214,24 +225,28 @@ public class TaskDetailActivity extends AppCompatActivity {
 
     private String getColorNameFromHex(String hex) {
         switch (hex.toLowerCase()) {
-            case "#ff0000": return "Red";
-            case "#00ff00": return "Green";
-            case "#0000ff": return "Blue";
-            default: return "Gray";
+            case "#87CEEB": return "1";
+            case "#59F48D": return "2";
+            case "#FFEE80": return "3";
+            case "#FFCC80": return "4";
+            case "#FF8080": return "5";
+            default: return "1";
         }
     }
 
     private String getColorHex(String colorName) {
         switch (colorName.toLowerCase()) {
-            case "red": return "#FF0000";
-            case "green": return "#00FF00";
-            case "blue": return "#0000FF";
-            default: return "#808080";
+            case "1": return "#87CEEB";
+            case "2": return "#59F48D";
+            case "3": return "#FFEE80";
+            case "4": return "#FFCC80";
+            case "5": return "#FF8080";
+            default: return "#87CEEB";
         }
     }
 
     private void navigateToHome() {
-        Intent intent = new Intent(this, HomeFragment.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }
