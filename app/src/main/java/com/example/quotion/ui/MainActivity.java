@@ -6,13 +6,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.util.Consumer;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
@@ -29,8 +32,10 @@ import com.example.quotion.ui.task.TaskViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 
@@ -125,10 +130,7 @@ public class MainActivity extends AppCompatActivity {
         ImageView btnSelectCategory = view.findViewById(R.id.btnSelectCategory);  // view là root view nếu trong Dialog
         Button btnSend = view.findViewById(R.id.btnSend);
 
-        String[] colors = {
-                "Red", "Orange", "Yellow", "Lime", "Green",
-                "Cyan", "Sky Blue", "Blue", "Indigo", "Violet"
-        };
+        String[] colors = { "1", "2", "3","4","5"};
 
         ColorSpinnerAdapter adapter = new ColorSpinnerAdapter(this, colors);
         spinnerColor.setAdapter(adapter);
@@ -139,19 +141,17 @@ public class MainActivity extends AppCompatActivity {
         final String[] selectedTime = {""};
 
         btnSelectTime.setOnClickListener(v -> {
-            Calendar now = Calendar.getInstance();
-            new TimePickerDialog(this, (timePicker, hour, minute) -> {
-                selectedDateTime.set(Calendar.HOUR_OF_DAY, hour);
-                selectedDateTime.set(Calendar.MINUTE, minute);
-                selectedDateTime.set(Calendar.SECOND, 0);
-                selectedDateTime.set(Calendar.MILLISECOND, 0);
-
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
-                selectedTime[0] = sdf.format(selectedDateTime.getTime());
-
-                Toast.makeText(this, "Time selected: " + selectedTime[0], Toast.LENGTH_SHORT).show();
-            }, now.get(Calendar.HOUR_OF_DAY), now.get(Calendar.MINUTE), true).show();
+            showDateTimePicker(dateTime -> {
+                selectedTime[0] = dateTime;
+                Calendar cal = parseStringToCalendar(dateTime);
+                if (cal != null) {
+                    selectedDateTime.setTime(cal.getTime()); // cập nhật selectedDateTime với thời gian mới
+                }
+                Toast.makeText(this, "Date and time selected: " + dateTime, Toast.LENGTH_SHORT).show();
+            });
         });
+
+
 
         final String[] selectedCategory = {"Free"}; // mặc định là "Free"
         btnSelectCategory.setOnClickListener(v -> {
@@ -210,6 +210,55 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    private Calendar parseStringToCalendar(String dateTimeStr) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
+            Date date = sdf.parse(dateTimeStr);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            return cal;
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
+    private void showDateTimePicker(Consumer<String> onDateTimeSelected) {
+        View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_date_time_picker, null);
+        DatePicker datePicker = dialogView.findViewById(R.id.datePicker);
+        TimePicker timePicker = dialogView.findViewById(R.id.timePicker);
+        Button btnOk = dialogView.findViewById(R.id.btnOk);
+        datePicker.setMinDate(System.currentTimeMillis());
+
+
+        timePicker.setIs24HourView(true);
+
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setView(dialogView)
+                .create();
+
+        btnOk.setOnClickListener(v -> {
+            int year = datePicker.getYear();
+            int month = datePicker.getMonth();
+            int day = datePicker.getDayOfMonth();
+
+            int hour = timePicker.getHour();
+            int minute = timePicker.getMinute();
+
+            Calendar cal = Calendar.getInstance();
+            cal.set(year, month, day, hour, minute, 0);
+            cal.set(Calendar.MILLISECOND, 0);
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
+            String dateTime = sdf.format(cal.getTime());
+
+            onDateTimeSelected.accept(dateTime);
+            dialog.dismiss();
+        });
+
+        dialog.show();
+    }
 
     // mở thẳng đến focus fragment
     private void handleIntent(Intent intent) {
