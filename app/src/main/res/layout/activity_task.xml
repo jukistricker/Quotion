@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121212">
+
+    <!-- Nút Cancel -->
+    <FrameLayout
+        android:id="@+id/btnCancel"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="55dp"
+        android:layout_marginStart="24dp"
+        android:background="@drawable/cancel"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_margin="4dp"
+            android:src="@drawable/cancel" />
+    </FrameLayout>
+
+    <!-- Nút Edit -->
+    <ImageButton
+        android:id="@+id/btnEdit"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="48dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/edit"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- View trạng thái -->
+    <View
+        android:id="@+id/circleCheck"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="117dp"
+        android:layout_marginStart="24dp"
+        android:background="@drawable/status_circle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Tiêu đề -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="114dp"
+        android:layout_marginStart="61dp"
+        android:text="Do Math Homework"
+        android:textColor="#DEFFFFFF"
+        android:textSize="20sp"
+        android:letterSpacing="-0.01"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Mô tả -->
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:layout_marginStart="61dp"
+        android:layout_marginEnd="24dp"
+        android:text="Do chapter 2 to 5 for next week"
+        android:textColor="#AAAAAA"
+        android:textSize="16sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Container các thông tin chi tiết của Task -->
+    <RelativeLayout
+        android:id="@+id/task_detail_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDescription">
+
+        <!-- Time -->
+        <ImageView
+            android:id="@+id/icon_timer"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignTop="@+id/task_time_text"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/timer" />
+
+        <TextView
+            android:id="@+id/task_time_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_toEndOf="@id/icon_timer"
+            android:letterSpacing="-0.02"
+            android:lineHeight="21dp"
+            android:text="Task Time :"
+            android:textColor="#DEFFFFFF"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/time_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/label_container"
+            android:backgroundTint="#36FFFFFF"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"
+            android:text="Today At 16:45"
+            android:textColor="#DEFFFFFF"
+            android:textSize="12sp" />
+
+        <!-- Category -->
+        <ImageView
+            android:id="@+id/icon_tag"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_below="@id/task_time_text"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/flag" />
+
+        <TextView
+            android:id="@+id/task_category_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/icon_tag"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@id/icon_tag"
+            android:letterSpacing="-0.02"
+            android:lineHeight="21dp"
+            android:text="Task Category :"
+            android:textColor="#DEFFFFFF"
+            android:textSize="16sp" />
+
+
+        <!-- Priority -->
+
+        <Spinner
+            android:id="@+id/spinnerCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/task_category_text"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="-8dp"
+            android:layout_marginEnd="1dp"
+            android:backgroundTint="#36FFFFFF"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"
+
+            android:textColor="#DEFFFFFF"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/priority_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_below="@id/task_category_text"
+            android:layout_marginTop="24dp"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/brush" />
+
+        <TextView
+            android:id="@+id/task_priority_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/priority_icon"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@id/priority_icon"
+            android:letterSpacing="-0.02"
+            android:lineHeight="21dp"
+            android:text="Change Color :"
+            android:textColor="#DEFFFFFF"
+            android:textSize="16sp" />
+
+
+        <!-- Delete Task -->
+
+        <Spinner
+            android:id="@+id/spinnerColoredt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/task_priority_color"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="-8dp"
+            android:layout_marginEnd="2dp"
+            android:backgroundTint="#36FFFFFF"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"
+
+            android:textColor="#DEFFFFFF"
+            android:textSize="12sp" />
+
+        <LinearLayout
+            android:id="@+id/delete_task_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/task_priority_color"
+            android:layout_marginTop="28dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/trash" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Delete Task"
+                android:textColor="@color/red"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <!-- Edit Button -->
+        <Button
+            android:id="@+id/btn_edit_task"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/delete_task_container"
+            android:layout_marginTop="410dp"
+            android:backgroundTint="@color/color_Primary_Color"
+            android:padding="12dp"
+            android:text="Save Changes"
+            android:textColor="@android:color/white" />
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

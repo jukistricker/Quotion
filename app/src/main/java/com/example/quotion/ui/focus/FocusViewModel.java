@@ -15,6 +15,14 @@ public class FocusViewModel extends ViewModel {
     private final MutableLiveData<Boolean> _saveSuccess = new MutableLiveData<>();
     public LiveData<Boolean> saveSuccess = _saveSuccess;
 
+    // --- lưu trạng thái timer ---
+    private final MutableLiveData<Long> _timeLeftMillis = new MutableLiveData<>();
+    public LiveData<Long> timeLeftMillis = _timeLeftMillis;
+
+    private final MutableLiveData<Boolean> _isRunning = new MutableLiveData<>(false);
+    public LiveData<Boolean> isRunning = _isRunning;
+    // ----------------------------------------------
+
     public FocusViewModel(){
         repository = new FocusRepository();
     }
@@ -24,5 +32,11 @@ public class FocusViewModel extends ViewModel {
     }
     public void loadFocusSessionsForChart(){
         repository.loadFocusSessionsPerDay(result -> _dailyFocusDurations.postValue(result));
+    }
+    public void setTimeLeftMillis(long millis){
+        _timeLeftMillis.postValue(millis);
+    }
+    public void setIsRunning(boolean running){
+        _isRunning.postValue(running);
     }
 }

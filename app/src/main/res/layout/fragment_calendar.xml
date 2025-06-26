@@ -1,11 +1,50 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#121212">
 
     <TextView
-        android:id="@+id/text_calendar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Calendar" />
-</FrameLayout>
+        android:text=" Calendar "
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"
+        android:layout_gravity="center"/>
+
+    <com.example.quotion.ui.calendar.CalendarWidgetView
+        android:id="@+id/calendarWidget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#CCFFFFFF"
+        android:textSize="14sp"
+        android:layout_marginTop="16dp"
+        android:lineSpacingExtra="4dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/taskCalendarRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="8dp"
+        android:clipToPadding="false"
+        android:paddingBottom="16dp" />
+    <TextView
+        android:id="@+id/emptyText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Không có công việc nào hôm nay"
+        android:textColor="#CCCCCC"
+        android:textSize="14sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:visibility="gone" />
+
+</LinearLayout>
